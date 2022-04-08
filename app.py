@@ -1,3 +1,6 @@
+# Main program entry
+
+# import libraries
 from flask import Flask, render_template, Response, session, request, redirect
 from flask_session import Session
 from tempfile import mkdtemp
@@ -10,7 +13,8 @@ from init import drivers
 import json
 from random import *
 import helper
-from werkzeug.security import check_password_hash, generate_password_hash
+from chatbot import chatbot_response
+from datetime import date
 
 # CONFIG
 UPLOAD_FOLDER = './static/images'
@@ -19,7 +23,7 @@ ALLOWED_EXTENSIONS = {'txt', 'png', 'jpg', 'jpeg'}
 # LOGGING CONFIG
 logging.basicConfig(    
     level=logging.WARNING,
-    # filename='./log/{}-SERVERLOG.log'.format(str(date.today())),
+    filename='./log/{}-SERVERLOG.log'.format(str(date.today())),
     encoding='utf-8' 
     )
 
@@ -43,14 +47,15 @@ def after_request(response):
     response.headers['Pragma'] = 'no-cache'
     return response
 
-
+# main index
 @app.route('/', methods=['GET','POST'])
 def index():
-    # return redirect('/map')
 
+    # gets login details
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        # auths user
         if auth_user(username, password):
             session['user_id'] = username
             return redirect('/map')
@@ -76,7 +81,6 @@ def register():
         pw = request.form.get("password")
         
         init.store.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, pw,))
-
         init.store.commit()
         
         # Redirect user to success
@@ -99,8 +103,6 @@ def getroute():
     type = data['type']
     rt = data['routetype']
 
-    
-    
     startNode = helper.getNode(init.store,init.vt, start)
     endNode = helper.getNode(init.store, init.vt, end)
     driver = init.heuristicAlgo(startNode, pax, type)
@@ -122,8 +124,10 @@ def getroute():
     ).add_to(m)
 
     if type == 'pool':
-        pax2Start = '10'
-        pax2End = '80'
+        pax2Start = str(randint(0, 123))
+        pax2End = pax2Start
+        while pax2End == pax2Start:
+            pax2End = str(randint(0, 123))
         res = init.sharedRoute(startNode, endNode, pax2Start, pax2End)
         res2 = init.graph1.getShortestPath(driver['loc'], startNode, init.edges1) #driver to pax
 
@@ -224,17 +228,32 @@ def getvertex():
 @app.route('/api/ai', methods=['POST'])
 @login_required
 def ai():
-    ret = {}
+    ls = []
     for i in init.onroad:
         try:
-            ret[i['id']] = i['route']['route'][0]
+            ret = {
+                'id':i['id'],
+                'loc':i['route']['route'][0],
+            }
             del i['route']['route'][0]
+            ls.append(ret)
         except:
             i['route'] = drivers.randomRoute(init.graph1, init.edges1, init.vt)
-            ret[i['id']] = i['route']['route'][0]
+            ret = {
+                'id': i['id'],
+                'loc':i['route']['route'][0]
+            }
             del i['route']['route'][0]
-    msg = json.dumps(ret)
+            ls.append(ret)
+        
+    msg = json.dumps(ls)
     return Response(msg)
+
+@app.route('/drivers', methods=['GET', 'POST'])
+@login_required
+def driver():
+
+    return render_template('driver.html')
 
 @app.route('/logout')
 @login_required
@@ -248,6 +267,18 @@ def auth_user(username, password):
     if rows[0] != 1:
         return False
     return True
+
+@app.route('/chatbot')
+@login_required
+def chatbot():
+    return render_template('chatbot.html')
+
+@app.route('/get')
+@login_required
+def get_bot_response():
+    userText = request.args.get('msg')
+    print(userText)
+    return chatbot_response(str(userText))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001) 

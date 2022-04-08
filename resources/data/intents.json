@@ -1,0 +1,53 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi there", "How are you", "Is anyone there?","Hey","Hola", "Hello", "Good day"],
+         "responses": ["Hello, thanks for asking", "Good to see you again", "Hi there, how can I help?"],
+         "context": [""]
+        },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+         "responses": ["See you!", "Have a nice day", "Bye! Come back again soon.", "Thank you for using Lyft!, we hope you continue to enjoy our services! "],
+         "context": [""]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure", "No problem, I hope that I managed to answer your questions!"],
+         "context": [""]
+        },
+        {"tag": "noanswer",
+         "patterns": [],
+         "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"],
+         "context": [""]
+        },
+        {"tag": "made by",
+         "patterns": ["who made this app", "who made","made by", "made"],
+         "responses": ["CSC1008 Team: John, Teo Leng, Jun Heng & Ronnie"],
+         "context": [""]
+        },
+        {"tag": "book a ride",
+         "patterns": ["How do I book a ride?", "book", "1"],
+         "responses": ["Simply set your pick up & drop off point and wait for our driver to accept your request."],
+         "context": [""]
+        },
+        {"tag": "pay for ride",
+         "patterns": ["How do I pay for the ride?", "pay", "2"],
+         "responses": ["Our driver will only accept Cash OR Credit card Payment!"],
+         "context": [""]
+        },
+        {"tag": "extra charges",
+         "patterns": ["Will there be extra charges for boarding the car late?", "charges", "3"],
+         "responses": ["Yes! There will be a 5 min grace period, however, you will be charged $3/5 mins after the grace period."],
+         "context": [""]
+        },
+        {"tag": "location",
+                "patterns": ["location", "city"],
+                "responses": ["Singapore"],
+                "context": [""]
+        },
+        {"tag": "faq",
+                "patterns": ["faq"],
+                "responses": ["1.Book a ride 2.Pay for ride 3.Extra charges"],
+                "context": [""]
+        } 
+   ]
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\chatbot.css">
+    <title>Chatbot</title>
+</head>
+<body>
+    <main>
+        <section class="glass">
+            <div class="dashboard">
+                <div class="bot">
+                    <img src="static/bot.png" alt="bot" height="80px" width="80px">
+                    <h3>Lyft Chatbot</h3>
+                    <a href="/map">Back to Map</a>
+                    <p>Welcome to Lyft Chatbot</p>
+                </div>
+            </div>
+            <div class="chat-section">
+                <div class="chat-view">
+                        <div class="bot-container">
+                            <div class="bot-msg">How can I help you?</div>
+                        </div>
+                </div>
+                <div class="type-section">
+                    <input id="my-text" class = "input-field" type="text" name="msg">
+                </div>
+            </div>
+        </section>
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      function getBotResponse(){
+          var myText = $("#my-text").val();
+          var userBubble = '<div class="your-container"><div class="your-msg">'+ myText +'</div></div>';
+          $("#my-text").val("");
+          $(".chat-view").append(userBubble);
+          $(".chat-view").stop().animate({scrollTop: $(".chat-view")[0].scrollHeight}, 1000);
+
+          $.get("/get", {msg: myText }).done(function(data){
+              var botBubble = '<div class="bot-container"><div class="bot-msg">'+ data +'</div></div>';
+              $(".chat-view").append(botBubble);
+          }); 
+      }
+      $("#my-text").keypress(function(e){
+          if (e.which == 13){
+              getBotResponse();
+        }
+    });
+    </script>
+</body>
+</html>

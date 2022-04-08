@@ -132,7 +132,7 @@ graph2 = pathAlgo(vt, edges2) # fastest route
 
 # format for getting route
 
-# route1 = graph1.getShortestPath('22', '83', edges1)
+route1 = graph1.getShortestPath('22', '83', edges1)
 # print(route1)
 
 # init onroad
@@ -193,7 +193,7 @@ def heuristicAlgo(node, pax, type):
 
     return bestFit
 
-# print(heuristicAlgo('5', 3, 'standard'))
+# print(heuristicAlgo('5', 2, 'standard'))
 
 def sharedRoute(s1, e1, s2, e2):
     r11 = graph1.getShortestPath(s1, e1, edges1)
@@ -220,36 +220,5 @@ def sharedRoute(s1, e1, s2, e2):
         return [r21,r22,r23]
     else:
         return [r31,r32,r33]
-
-def updateLoc(route):
-
-    ret = {}
-    try:
-        if len(route['route'][0]) == 0:
-            del route['route'][0]
-            del route['dist'][0]
-            del route['path'][0]
-
-        ret['dist'] = (sum(route['dist'])) # left how much
-        ret['loc'] = route['route'][0][0]
-        ret['path'] = route['path']
-        del route['route'][0][0]
-    except IndexError:
-        return None
-
-import time
-
-while True:
-    toPrint = {}
-    for i in onroad:
-        try:
-            toPrint[i['id']] = i['route']['route'][0]
-            del i['route']['route'][0]
-        except:
-            i['route'] = drivers.randomRoute(graph1, edges1, vt)
-            toPrint[i['id']] = i['route']['route'][0]
-            del i['route']['route'][0]
-    print(toPrint)
-    time.sleep(0.2)
 
 

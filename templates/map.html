@@ -7,34 +7,35 @@ Map
 {% block navbar %}
 <div id="mySidenav" class="sidenav" style="z-index:901">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a>Lyft Ride Simulator</a>
+<a><img src="/static/img/lyftlogo_s.png"></a>
+<br>
     <div style="padding:5px;text-align:center;">
+        <h1 style="font-size:15px">Lyft Ride Hailing App</h1>
     <form method="POST" id="postform">
-        Postal From:
         <input type="text" id="id" hidden="true" value={{ user_id }}>
-        <input type="text" id="start" class="form-control" placeholder="Start Postal" required>
-        Postal To:
-        <input type="text" id="end" class="form-control" placeholder="End Postal" required>
-        Number of Pax:
-        <input type="number" id="pax" class="form-control" placeholder="Pax Number" value= 1 min=1 required>
-        <label for="type">Ride Type</label><br>
-        <select id="type" name="type" required>
+        <input type="text" id="start" class="form-control" style="font-size:10px;"placeholder="Start Postal" style="border-radius:10px;">
+        <input type="text" id="end" class="form-control" style="font-size:10px;"placeholder="End Postal" style="border-radius:10px;">
+
+        <input type="number" id="pax" class="form-control" style="font-size:10px;"placeholder="Number of Pax" min=1 style="border-radius:10px;">
+        <label for="type"style="font-size:10px;">Ride Type</label>
+        <select style="border-radius:5px;font-size:10px;" id="type" name="type" style="width:100%;">
             <option value="standard">Standard</option>
             <option value="pool">Shared Ride</option>
         </select>
-        <label for="routetype">Route Type</label><br>
-        <select id="routetype" name="routetype" required>
+        <label for="routetype"style="font-size:10px;">Route Type</label>
+        <select style="border-radius:5px;font-size:10px;" id="routetype" name="routetype" required>
             <option value="fastest">Fastest</option>
             <option value="shortest">Shortest</option>
             <option value="both">Both</option>
         </select>
         <br>
-        <button type="button" id="btn1" class="btn btn-success" onclick="getRoute()">Show Route</button>
-        <hr>
-        <button type="button" id="btn2" class="btn btn-info" onclick="getPoints()">Show All Points</button>
+        <button type="button" id="btn" onclick="getRoute()">Show Route</button><hr>
+        <button type="button" id="btn" onclick="getPoints()">Show All Points</button>
         <br>
-    </form>
-        <button type="button" id="btn2" class="btn btn-danger" onclick="location.href='/';"></button>Logout</a>
+    </form> 
+        <button type="button" id="btn" onclick="location.href='/chatbot';">Chatbot</button></a>
+        <button type="button" id="btn" onclick="location.href='/drivers';">Drivers</button></a>
+        <button type="button" id="btn" onclick="location.href='/logout';">Logout</button></a>
     </div>
 </div>
 {% endblock %}

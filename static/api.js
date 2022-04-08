@@ -1,22 +1,3 @@
-var customIcon = L.icon({
-  iconUrl:'https://img.auto-che.com/logo/qim/bmw.png',
-  iconSize: [30, 30]
-});
-
-// const json = require("../dataout.json");
-// console.log(json)
-
-var mymap = L.map('mapid').setView([1.3541, 103.8198], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(mymap);
-
-// var polyline = L.polyline(latlngs, {
-//   color: 'red'
-// }).addTo(mymap);
-
 function getRoute() {
     var start = document.getElementById('start').value;
     var end = document.getElementById('end').value;
