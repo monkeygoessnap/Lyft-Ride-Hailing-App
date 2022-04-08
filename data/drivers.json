@@ -1,0 +1,30 @@
+{
+    "1111": {
+        "name": "roger tay",
+        "car": "bmw 528i",
+        "carplate": "SGP1111P",
+        "space": 4,
+        "type":"standard"
+    },
+    "2222": {
+        "name": "peter tan",
+        "car": "honda civic",
+        "carplate": "SGP2222P",
+        "space": 4,
+        "type":"pool"
+    },
+    "3333": {
+        "name": "sam lee",
+        "car": "toyota wish",
+        "carplate": "SGP3333P",
+        "space": 6,
+        "type":"standard"
+    },
+    "4444": {
+        "name": "alvin wong",
+        "car": "toyota estima",
+        "carplate": "SGP4444P",
+        "space": 6,
+        "type":"pool"
+    }
+}

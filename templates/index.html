@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block main %}
+
+        <div class="hero-text">
+            <p><a href="/"><img src="/static/img/lyftlogo_b.png"></p></a>
+            <div id="box">
+                <h3>Login</h3>
+                <br>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control" name ="username" placeholder="Username" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <input autocomplete="off" class="form-control" name ="password" minlength="3" placeholder="Password (min. 3 char)" type="password" required>
+                    </div>
+                    <br>
+                    <button id="btn" type="submit">Go</button>
+                </form>
+                <hr>
+                <button onclick="location.href='/register';" id="btn" type="button">Register</button>
+            </div>
+
+        </div>
+
+
+{% endblock %}

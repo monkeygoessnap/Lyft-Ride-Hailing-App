@@ -1,0 +1,12 @@
+{
+    "1000":{
+        "username": "admin1",
+        "password": "123",
+        "type": "admin"
+    },
+    "2000":{
+        "username": "user1",
+        "password": "123",
+        "type": "pax"
+    }
+}

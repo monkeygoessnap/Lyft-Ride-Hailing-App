@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Map
+{% endblock %}
+
+{% block navbar %}
+<div id="mySidenav" class="sidenav" style="z-index:901">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a>Lyft Ride Simulator</a>
+    <div style="padding:5px;text-align:center;">
+    <form method="POST" id="postform">
+        Postal From:
+        <input type="text" id="id" hidden="true" value={{ user_id }}>
+        <input type="text" id="start" class="form-control" placeholder="Start Postal" required>
+        Postal To:
+        <input type="text" id="end" class="form-control" placeholder="End Postal" required>
+        Number of Pax:
+        <input type="number" id="pax" class="form-control" placeholder="Pax Number" value= 1 min=1 required>
+        <label for="type">Ride Type</label><br>
+        <select id="type" name="type" required>
+            <option value="standard">Standard</option>
+            <option value="pool">Shared Ride</option>
+        </select>
+        <label for="routetype">Route Type</label><br>
+        <select id="routetype" name="routetype" required>
+            <option value="fastest">Fastest</option>
+            <option value="shortest">Shortest</option>
+            <option value="both">Both</option>
+        </select>
+        <br>
+        <button type="button" id="btn1" class="btn btn-success" onclick="getRoute()">Show Route</button>
+        <hr>
+        <button type="button" id="btn2" class="btn btn-info" onclick="getPoints()">Show All Points</button>
+        <br>
+    </form>
+        <button type="button" id="btn2" class="btn btn-danger" onclick="location.href='/';"></button>Logout</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+
+<div id="navicon" style="z-index:900">
+    <a style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</a>
+</div>
+
+<div id="main">
+    <div style = "width:100%; height:100vh;">
+    {{ map | safe }}</div>
+</div>
+
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "190px";
+      document.getElementById("main").style.marginLeft = "190px";
+      document.getElementById("navicon").style.visibility = "hidden";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+      document.getElementById("navicon").style.visibility = "visible";
+    }
+
+</script>
+<script src="../static/api.js"></script>
+
+{% endblock %}

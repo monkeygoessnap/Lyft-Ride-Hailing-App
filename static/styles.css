@@ -1,0 +1,117 @@
+.hero-image {
+    background-color: #cccccc;
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+  
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+body {
+    /* background: linear-gradient(to right, #9ED9CCFF 0%, #008C76FF 100%);  */
+    background-color:black;
+    background-image: url("https://www.formula1.com/content/dam/fom-website/manual/XPB_Images/Singapore_2019/Pre/XPB_959310_HiRes.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    background-position: 50% 0;
+    font-family: "Helvetica", sans-serif;
+    color: white;
+}
+
+#btn {
+    width: 150px;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-weight: 200;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#btn:hover {
+border-color: #00ffff;
+transition: 0.5s;
+}
+
+#navlogo {
+    width: auto;
+    height: 30px;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+  /* sidenav */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-radius:0 px 10px 10px 0px;
+}
+  
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+  
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+  
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
+#navicon {
+    border-radius:0px 10px 10px 0px;
+    background-color:black;
+    text-align:center;
+    opacity:0.9;
+    position:absolute;
+    top:40%;
+    left:0;
+    width:40px;
+}
+
+#box {
+    margin:auto;
+    padding:50px;
+    width:70%;
+    border-radius:25px;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    background: rgba(0,0,0,0.7);
+}
