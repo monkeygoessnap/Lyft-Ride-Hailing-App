@@ -1,3 +1,5 @@
+# file to initialize all global variables and key functions and data from external sources
+# run this file before the main program
 # import libraries
 import json
 import polyline
@@ -7,6 +9,7 @@ import djikstra
 from random import randint
 
 # loaddata class with static methods
+# initialize loadData class
 class loadData:
     # get vertex data in map form, key(vertex node):value(vertex coordinates in latlong)
     def getVertexes():
@@ -38,7 +41,7 @@ class loadData:
         except:
             return None
 
-# init db
+# initialize database
 class loadDb:
     def __init__(self):
         self.db_path = 'project.db'
@@ -54,6 +57,7 @@ class loadDb:
 
 
 # pathing algo using djikstra
+# initialize pathAlgo class
 class pathAlgo:
     def __init__(self, vt, edges):
         graph = {}
@@ -65,6 +69,7 @@ class pathAlgo:
         self.graph = djikstra.Graph(nodes, graph)
 
     ## return route info and dist
+    # get shortest path using djikstra algo
     def getShortestPath(self, startNode, endNode, edges):
         retInfo = {
             'path' : [],
@@ -90,13 +95,14 @@ class pathAlgo:
                 retInfo['dist'].append(edges[idx]['dist'])
                 retInfo['totaldist'] += edges[idx]['dist']
         return retInfo
-
+#class for drivers
 class drivers:
+    #initialize data for drivers
     def __init__(self):
         file = open('./data/drivers.json')
         self.data = json.load(file)
         file.close()
-
+    #generates random routes
     def randomRoute(graph, edge, vt):
         # get random vertexes for start and end
         start = randint(1, len(vt))
@@ -157,9 +163,9 @@ for k,v in cars.items():
 # terminate if conditions met
 # if not choose the best candidates
 def heuristicAlgo(node, pax, type):
-
+    # select initial candidates pool
     candidates = []
-
+    # loop through to get candidates pool
     for i in onroad:
         loc = i['route']['path'][0] # vertex number
         if not i['spaceleft'] < pax and i['details']['type'] == type:
@@ -167,55 +173,69 @@ def heuristicAlgo(node, pax, type):
                 {
                     'id':i['id'],
                     'loc':loc,
-                    'dist':999999,
+                    'dist':999999, # add default max distance 
                     }
             )
-
+    # if no candidates return none
     if len(candidates) < 1:
         return None
-
+    # assign initial bestfit
     bestFit = candidates[0]
-
+    # initiate loop to get bestfit
     while True:
+        # get random index
         idx = randint(0, len(candidates)-1)
+        # get initial candidate 
         candidate = candidates[idx]
+        # get distance by using djistra
         dist = graph2.getShortestPath(node, candidate['loc'], edges2)['totaldist']
         candidate['dist'] = dist
+        # compare if candidate dist better than bestfit dist
         if candidate['dist'] < bestFit['dist']:
-            bestFit = candidate
-
-        print(dist, bestFit)
+            # assign bestfit to candidate if so
+            bestFit = candidate 
+        
+        # if distance less than 4167, or 5mins drive at 50km/h
         if dist < 4167:
+            # break loop
             break
+        # delete candidate from index
         del candidates[idx]
+        # break if len is less than 1
         if len(candidates) < 1:
             break
-
+    # return bestfit
     return bestFit
 
 # print(heuristicAlgo('5', 2, 'standard'))
 
+# get the shortest shared route based on the number of pax
 def sharedRoute(s1, e1, s2, e2):
+    # first route permuatation
     r11 = graph1.getShortestPath(s1, e1, edges1)
     r12 = graph1.getShortestPath(s2, e2, edges1)
     r13 = graph1.getShortestPath(e1, s2, edges1)
-
+    # first route total distance
     r1d = r11['totaldist'] + r12['totaldist'] + r13['totaldist']
 
+    # 2nd route permutation
     r21 = graph1.getShortestPath(s1, s2, edges1)
     r22 = graph1.getShortestPath(s2, e1, edges1)
     r23 = graph1.getShortestPath(e1, e2, edges1)
-    
+    # 2nd route total distance
     r2d = r21['totaldist'] + r22['totaldist'] + r23['totaldist']
 
+    # 3rd route permutation
     r31 = graph1.getShortestPath(s1, s2, edges1)
     r32 = graph1.getShortestPath(s2, e2, edges1)
     r33 = graph1.getShortestPath(e2, e1, edges1)
-
+    # 3rd route total distance
     r3d = r31['totaldist'] + r32['totaldist'] + r33['totaldist']
-
+    # if r1 less than r2 or r1 less than r3
     if r1d > r2d or r1d > r3d:
+        # do not pick passenger up
         return None
+    # else returns the optimal route as list
     elif r2d < r3d:
         return [r21,r22,r23]
     else:

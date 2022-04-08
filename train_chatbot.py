@@ -1,3 +1,5 @@
+# file to train chatbot to reply
+# import python library
 import nltk
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -5,13 +7,13 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import json
 import pickle
-
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from tensorflow.keras.optimizers import SGD
 import random
 
+# initialize variables for different data 
 words=[]
 classes = []
 documents = []
@@ -19,7 +21,7 @@ ignore_words = ['?', '!']
 data_file = open('resources\data\intents.json').read()
 intents = json.loads(data_file)
 
-
+# loop through json intents
 for intent in intents['intents']:
     for pattern in intent['patterns']:
 
@@ -33,18 +35,20 @@ for intent in intents['intents']:
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
+# assign words to be sorted
 words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_words]
 words = sorted(list(set(words)))
 
+# assign classes list to be sorted
 classes = sorted(list(set(classes)))
 
-print (len(documents), "documents")
+# print (len(documents), "documents")
 
-print (len(classes), "classes", classes)
+# print (len(classes), "classes", classes)
 
-print (len(words), "unique lemmatized words", words)
+# print (len(words), "unique lemmatized words", words)
 
-
+# dump words into pk1 file
 pickle.dump(words,open('resources\pickles\words.pkl','wb'))
 pickle.dump(classes,open('resources\pickles\classes.pkl','wb'))
 
@@ -73,7 +77,7 @@ training = np.array(training)
 # create train and test lists. X - patterns, Y - intents
 train_x = list(training[:,0])
 train_y = list(training[:,1])
-print("Training data created")
+# print("Training data created")
 
 
 # Create model - 3 layers. First layer 128 neurons, second layer 64 neurons and 3rd output layer contains number of neurons
@@ -93,4 +97,4 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
 model.save('resources\models\chatbot_model4.h5', hist)
 
-print("model created")
+# print("model created")

@@ -35,7 +35,7 @@ def bag_of_words(sentence, words, show_details=True):
                 if show_details:
                     print(f"found in bag: {w}")
     return (np.array(bag))
-
+#predicts response based on user input 
 def predict_class(sentence, model):
     p = bag_of_words(sentence, words, show_details=False)
     res = model.predict(np.array([p]))[0]
@@ -48,7 +48,7 @@ def predict_class(sentence, model):
             "probability": str(r[1])}
         )
     return return_list
-  
+  #Gets list of responses based on user input and choose 1 to reply with randomly
 def get_responses(ints, intents_json):
     tag = ints[0]['intent']
     list_of_intents = intents_json['intents']
@@ -57,21 +57,8 @@ def get_responses(ints, intents_json):
             result = random.choice(i['responses'])
             break
     return result
-  
+  #Chatbot output to users
 def chatbot_response(message):
     ints = predict_class(message, model)
     res = get_responses(ints, intents)
     return res
-  
-# def main():
-#     while True:
-#         inp = input('You:\t')
-#         if inp == 'exit':
-#             break
-#         else: 
-#             chatbot_result = chatbot_response(inp)
-#             print(f'bot:\t{chatbot_result}')
-            
-# if __name__ == '__main__':
-#     print('TYPE exit TO QUIT!')
-#     main()

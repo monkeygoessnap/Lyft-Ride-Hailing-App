@@ -22,7 +22,7 @@ def getNearestNode(latlong, vt):
             min = dist
             node = vt
     return node
-
+#gets latlong for postal code
 def getLatLong(db, postal):
     rows = db.execute("SELECT * FROM sg WHERE postal = ?", (postal,)).fetchone()
     if rows != None:
@@ -34,11 +34,12 @@ def getDistance(a, b):
     n2 = tuple(b)
     return geodesic(n1, n2).meters
 
+# conversion factor based on 50km/h speed average, not on expressways
+# returns in mins
 def distToTime(meters):
-    # conversion factor based on 50km/h speed average, not on expressways
-    # returns in mins
     return meters/50000 * 60
 
+#Uses latlong of the postal code to get nearest node
 def getNode(db, vt, postal):
     latlong = getLatLong(db, postal)
     return getNearestNode(latlong, vt)
