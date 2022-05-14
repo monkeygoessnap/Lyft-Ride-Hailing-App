@@ -21,6 +21,14 @@ Design and implement an on-demand transportation application that enables users 
 - random drivers visualization
 - AI chatbot
 
+## Demo
+<img width="1118" alt="image" src="https://user-images.githubusercontent.com/77936767/168416115-70e71635-9ec4-49d6-9303-5bdf6b99acda.png">
+<img width="1118" alt="image" src="https://user-images.githubusercontent.com/77936767/168416144-979153a7-511e-4534-a464-08a5c09b6607.png">
+<img width="760" alt="image" src="https://user-images.githubusercontent.com/77936767/168416168-fa0fe6e5-c48b-4f10-9287-9e552c2118c1.png">
+<img width="1118" alt="image" src="https://user-images.githubusercontent.com/77936767/168416185-69a14bc4-5991-4f5a-b8c8-2e0c4d677c83.png">
+<img width="1117" alt="image" src="https://user-images.githubusercontent.com/77936767/168416206-fe67a5c5-b003-4e50-a5c3-9e3bf7b0c97a.png">
+
+
 ## Contributors
 - Ng Jun Heng
 - Teo Leng
