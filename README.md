@@ -1,8 +1,7 @@
-# CSC1008 Data Structures and Algorithm (Final Project)
 Lyft Ride Hailing App
 
 ## Objectives
-Design and implement an on-demand transportation application that enables users to request private and shared rides.
+Design and implement an on-demand transportation application that enables users to request private and shared rides using self-implemented DSA.
 
 ## How to run
 - git clone entire repository to your local drive/ cloud drive
@@ -27,10 +26,3 @@ Design and implement an on-demand transportation application that enables users 
 <img width="760" alt="image" src="https://user-images.githubusercontent.com/77936767/168416168-fa0fe6e5-c48b-4f10-9287-9e552c2118c1.png">
 <img width="1118" alt="image" src="https://user-images.githubusercontent.com/77936767/168416185-69a14bc4-5991-4f5a-b8c8-2e0c4d677c83.png">
 <img width="1117" alt="image" src="https://user-images.githubusercontent.com/77936767/168416206-fe67a5c5-b003-4e50-a5c3-9e3bf7b0c97a.png">
-
-
-## Contributors
-- Ng Jun Heng
-- Teo Leng
-- Ronnie Ng
-- John Wang
